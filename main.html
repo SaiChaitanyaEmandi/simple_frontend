@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Check String</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+  </head>
+  <body>
+    <div class="nav">
+      <h2 class="title">Hate Speech</h2>
+      <div class="navbar">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="main.html" class="nav-link">Predict</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+    </div> 
+    <div class="check">
+    <form action="http://127.0.0.1:5000/check" method="get">
+      <h2 id="main-head">Enter any speech to check if it contains hate speech </h2>
+      <textarea id="string" name="string" rows="10" cols="50"></textarea>
+      <div class="btn"><button id="check" type="submit">Check</button></div>    
+    </form>
+    <div id="result"></div>
+    </div>
+    
+    <script>
+      const form = document.querySelector('form'); 
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const inputString = document.querySelector('#string').value;
+        const response = await fetch(`http://127.0.0.1:5000/check?string=${inputString}`);
+        const data = await response.text();
+        document.getElementById("result").innerHTML=data
+      });
+    </script>
+  </body>
+</html>
